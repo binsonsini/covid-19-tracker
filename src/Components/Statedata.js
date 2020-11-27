@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import { Accordion, Card, Button } from "react-bootstrap";
+import { Accordion, Card, Button,OverlayTrigger, Tooltip} from "react-bootstrap";
 class Statedata extends Component {
   constructor() {
     super();
@@ -13,6 +13,7 @@ class Statedata extends Component {
       response => {
         console.log(response.data);
         this.setState({ stateData: response.data });
+        
       }
     );
   }
@@ -21,6 +22,7 @@ class Statedata extends Component {
     return (
       <div className="row">
         <div className="col-md-12">
+      
           <Accordion>
             {keys.map((itm, ky) => {
               let districts = this.state.stateData[itm].districtData;
@@ -44,11 +46,14 @@ class Statedata extends Component {
               }
               console.log(district_list);
               return (
+
                 <Card>
                   <Card.Header>
+                  <OverlayTrigger 
+                   overlay={<Tooltip id="tooltip-disabled">Click on state to view district wise data</Tooltip>}>
                     <Accordion.Toggle as={Button} variant="primary" eventKey={ky}>
                       {itm} <span className="btn-dark p-1 mr-2">Total Cases -{total_active}</span>  <span className="btn-dark p-1 mr-2">Active -{total_confirmed}</span><span className="btn-dark p-1 mr-2">Recovered -{total_recovered} </span> <span className="btn-dark p-1 mr-2">Death -{total_deaths}</span>
-                    </Accordion.Toggle>
+                    </Accordion.Toggle></OverlayTrigger>
                   </Card.Header>
                   <Accordion.Collapse eventKey={ky}>
                     <Card.Body>

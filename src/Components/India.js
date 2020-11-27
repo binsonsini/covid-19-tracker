@@ -3,22 +3,25 @@ import { Card } from "react-bootstrap";
 import Statedata from "./Statedata";
 import axios from "axios";
 class India extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       IndiaData: []
     };
   }
   componentDidMount() {
-    axios.get("https://corona.lmao.ninja/v2/countries/india").then( response=> {
+    axios.get("https://corona.lmao.ninja/v2/countries/india").then(response => {
       console.log(response.data);
-      this.setState({IndiaData: response.data});
-      })
+      this.setState({ IndiaData: response.data });
+    });
+    // this.scrollToBottom();
   }
+
   render() {
     return (
-      <div>
-        <div className="col-md-12">
+
+      <div >
+             <div className="col-md-12">
           <img src=" https://www.countryflags.io/in/shiny/64.png" />
           <h3>India</h3>
         </div>
@@ -29,7 +32,9 @@ class India extends Component {
                 <Card.Body className="text-centre">
                   <Card.Title>TOTAL CASES</Card.Title>
                   <h3>[{this.state.IndiaData.cases}]</h3>
-                  <Card.Text>Today :[{this.state.IndiaData.todayCases}]</Card.Text>
+                  <Card.Text>
+                    Today :[{this.state.IndiaData.todayCases}]
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </div>
@@ -38,7 +43,7 @@ class India extends Component {
                 <Card.Body className="text-centre">
                   <Card.Title>ACTIVE CASES</Card.Title>
                   <h3>[{this.state.IndiaData.active}]</h3>
-            </Card.Body>
+                </Card.Body>
               </Card>
             </div>
             <div className="col-md-3">
@@ -46,7 +51,7 @@ class India extends Component {
                 <Card.Body className="text-centre">
                   <Card.Title>RECOVERED </Card.Title>
                   <h3>[{this.state.IndiaData.recovered}]</h3>
-                              </Card.Body>
+                </Card.Body>
               </Card>
             </div>
             <div className="col-md-3">
@@ -54,7 +59,9 @@ class India extends Component {
                 <Card.Body className="text-centre">
                   <Card.Title> DEATHS</Card.Title>
                   <h3>[{this.state.IndiaData.deaths}]</h3>
-                  <Card.Text>Today : [{this.state.IndiaData.todayDeaths}]</Card.Text>
+                  <Card.Text>
+                    Today : [{this.state.IndiaData.todayDeaths}]
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </div>
